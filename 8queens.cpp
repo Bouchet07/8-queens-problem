@@ -124,7 +124,9 @@ void solve_queens(uint64_t attacks, uint64_t deep, uint64_t queens, std::unorder
         }
         return;
     }
-    for (uint64_t pos = 0; pos < 64; pos++) {
+    uint64_t u_limit = 8*(deep+1);
+    uint64_t l_limit = 8*deep;
+    for (uint64_t pos = l_limit; pos < u_limit; pos++) {
         if (!(attacks & (1ULL << pos))) {
             uint64_t new_attacks = get_queen_attacks(pos);
             solve_queens(attacks | new_attacks, deep + 1, set_bit(queens, pos), seen);
